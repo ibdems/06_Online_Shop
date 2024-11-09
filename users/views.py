@@ -4,7 +4,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.urls import reverse_lazy
 from django.views import View
 from django.contrib.auth.tokens import default_token_generator
-from config.utils.send_emails import send_mail_activation, send_mail_reset_password
+from .utils.send_emails import send_mail_activation, send_mail_reset_password
 from users.models import User
 from .forms import CustomCreateUserForm, CustomLoginForm
 from django.views.generic import CreateView
@@ -13,6 +13,7 @@ from django.db import transaction
 
 class CustomLoginView(LoginView):
     form_class =CustomLoginForm
+    template_name = 'registration/login.html'
 
 class CustomUserCreationView(CreateView):
     template_name = 'registration/register.html'
@@ -48,7 +49,7 @@ class ActivationUserView(View):
             user.save()
 
             messages.success(
-                self.request, "Votre a ete activer vous pouvez vous connectez"
+                self.request, "Votre compte a ete activer vous pouvez vous connectez"
             )
             return redirect(self.login_url)
         return render (request, 'registration/activation_invalid.html')

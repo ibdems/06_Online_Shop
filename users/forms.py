@@ -1,11 +1,12 @@
 from typing import Any
 from django import forms
 from django.contrib.auth.hashers import check_password
+from admin_volt.forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 from django.core.exceptions import ValidationError
 
-from config.utils.send_emails import send_mail_activation
+from .utils.send_emails import send_mail_activation
 from users.models import User
 
 class CustomLoginForm(AuthenticationForm):
@@ -15,7 +16,7 @@ class CustomLoginForm(AuthenticationForm):
 
         try:
             user = User.objects.get(email=username)
-        except:
+        except User.DoesNotExist:
             raise ValidationError(
                 "Email ou mot de pass invalid"
             )           
@@ -26,14 +27,15 @@ class CustomLoginForm(AuthenticationForm):
                 "Votre compte n'est pas actif, consulter votre boite mail pour l'activer"
             )
         
-        if not check_password(password, user.password):
+        if not user.check_password(password):
             raise ValidationError(
                 "Email ou mot de pass invalid"
             )
+        self.user_cache = user
         
         return self.cleaned_data
 
-class CustomCreateUserForm(UserCreationForm):
+class CustomCreateUserForm(RegistrationForm):
     class Meta:
         model = User
         fields = ('email', 'first_name', 'last_name', 'password1', 'password2')
