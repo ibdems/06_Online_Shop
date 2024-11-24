@@ -3466,3 +3466,9 @@ ol {
 		font-size: 24px;
 	}
 }
+
+.input_txt {
+	margin: 10px 5px;
+	border-radius: 0px;
+	border: 1px solid grey;
+}

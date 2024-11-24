@@ -18,6 +18,6 @@ migrate:
 
 .PHONY: superuser
 superuser:
-	python manage createsuperuser
+	python manage.py createsuperuser
 
 
