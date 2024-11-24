@@ -3468,7 +3468,13 @@ ol {
 }
 
 .input_txt {
-	margin: 10px 5px;
+	padding: 10px 5px;
 	border-radius: 0px;
-	border: 1px solid grey;
+	border: 1px solid rgb(172, 166, 166);
+}
+.input_txtSearch {
+	padding: 10px 5px;
+	border-radius: 0px;
+	border: 1px solid rgb(172, 166, 166);
+	width: 100%;
 }

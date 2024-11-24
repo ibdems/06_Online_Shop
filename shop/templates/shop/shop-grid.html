@@ -10,7 +10,7 @@ Magasin
         <form method="get">
             <div class="row">
                 <!-- Département Selection -->
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-12 col-md-5">
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
@@ -36,19 +36,19 @@ Magasin
                     </div>
                 </div>
                 <!-- Recherche par nom -->
-                <div class="col-lg-5">
-                    <div>
-                        <div>
-                            {{ filterset.form.name }}
-                            <button type="submit" class="site-btn">Rechercher</button>
-                        </div>
-                    </div>
+                <div class="col-lg-3 col-8 col-md-7">
+                   
+                    {{ filterset.form.name }}
+                </div>
+                <div class="col-lg-2 col-3 col-md-4">
+                   
+                    <button type="submit" class="site-btn">Rechercher</button>
                 </div>
                 <!-- Filtrage par prix -->
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-6 mt-2 mt-md-0 col-md-4">
                     {{ filterset.form.min_price }}
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-6 mt-2 mt-md-0 col-md-4">
                     {{ filterset.form.max_price }}
                 </div>
             </div>
@@ -58,14 +58,14 @@ Magasin
 <!-- Hero Section End -->
 
 <!-- Product Section Begin -->
-<section class="product spad">
+<section class="product spad" style='margin-top: -100px'>
     <div class="container">
         <!-- Catégories -->
         <div class="row mb-4">
             {% for category in categories %}
             <div class="col-auto">
                 <a href="?{% if request.GET.department %}department={{ request.GET.department }}&{% endif %}category={{ category.id }}"
-                    class="btn {% if request.GET.category == category.id|stringformat:'s' %}btn-primary{% else %}btn-secondary{% endif %}">
+                    class="btn mt-1 {% if request.GET.category == category.id|stringformat:'s' %}btn-primary{% else %}btn-secondary{% endif %}">
                     {{ category.name }}
                 </a>
             </div>

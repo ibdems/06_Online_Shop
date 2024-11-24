@@ -6,7 +6,7 @@ from shop.models import Categorie, Departments, Product
 class ProductFilter(FilterSet):
     name = CharFilter(
         lookup_expr='icontains',
-        widget = TextInput(attrs={'class': 'input_txt'})              
+        widget = TextInput(attrs={'class': 'input_txtSearch'})              
     )
     category = ModelChoiceFilter(
         queryset = Categorie.objects.all(),
@@ -17,8 +17,18 @@ class ProductFilter(FilterSet):
         queryset = Departments.objects.all(),
         empty_label = "Tout les sections"
     )
-    min_price  = NumberFilter(field_name='price', lookup_expr='gte')
-    max_price = NumberFilter(field_name='price', lookup_expr='lte')
+    min_price  = NumberFilter(
+        field_name='price', lookup_expr='gte',
+        widget = TextInput(
+            attrs={'class': 'input_txt', 'placeholder': 'Prix minimal'}
+        )
+    )
+    max_price = NumberFilter(
+        field_name='price', lookup_expr='lte',
+        widget = TextInput(
+            attrs={'class': 'input_txt', 'placeholder': 'Prix maximal'}
+        )
+    )
 
     class Meta:
         model = Product
